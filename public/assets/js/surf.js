@@ -1,40 +1,38 @@
-// Obtener el elemento por su ID
-const $ = e => document.getElementById(e) || [];
+/* -----------------------------------------------
+/* MIT license: http://opensource.org/licenses/MIT
+/* How to use? : Check the documentation. Button ID attributes are used for the script below.
+/* v2.0.0
+/* ----------------------------------------------- */
+$ = e => document.getElementById(e) || [];
 
-// Asignar un enlace a GitHub
 $("tacogithub").href = "https://github.com/Tacosheel/TacoProxy";
 
-// Evento para cargar la URL en el iframe
+//Alloy Default
+
 $('alloyframe').onclick = function() {
-    const frame = $('frame');
-    const url = $('iurl').value.trim(); // Obtener la URL introducida
-
-    // Comprobar si la URL no está vacía
-    if (url) {
-        const domain = document.domain.replace('www.', '').split(/[/?#]/)[0]; // Obtener el dominio
-        frame.src = "https://" + domain + "/prefix/" + url; // Redirigir a través del proxy con el prefijo
-        frame.style.visibility = "visible"; // Hacer visible el iframe
-    } else {
-        alert("Por favor, introduce una URL válida.");
-    }
+    var frame = document.getElementById("frame");
+    var url = $('iurl').value;
+    var det = document.domain;
+    var domain = det.replace('www.', '').split(/[/?#]/)[0];
+    const origin = btoa(url)
+    frame.src = "https://" + domain + "/prefix/" + origin;
+    frame.style['visibility'] = "visible";
     return false;
 };
 
-// Evento para redirigir completamente a través del proxy
+//Alloy Frame
+
 $('alloydefault').onclick = function() {
-    const url = $('iurl').value.trim(); // Obtener la URL introducida
-
-    // Comprobar si la URL no está vacía
-    if (url) {
-        const domain = document.domain.replace('www.', '').split(/[/?#]/)[0]; // Obtener el dominio
-        window.location.href = "https://" + domain + "/prefix/" + url; // Redirigir completamente
-    } else {
-        alert("Por favor, introduce una URL válida.");
-    }
+    var frame = document.getElementById("frame");
+    var url = $('iurl').value;
+    var det = document.domain;
+    var domain = det.replace('www.', '').split(/[/?#]/)[0];
+    const origin = btoa(url)
+    window.location.href = "https://" + domain + "/prefix/" + origin;
     return false;
 };
 
-// Poner el foco en el campo de entrada al cargar la página
+
 window.onload = function() {
     $('iurl').focus();
-};
+}
